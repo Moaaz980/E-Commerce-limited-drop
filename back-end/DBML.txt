@@ -1,0 +1,52 @@
+Table User {
+  id varchar [primary key, not null]
+  name varchar [not null]
+  surname varchar [not null]
+  email varchar [not null, unique]
+  password varchar [not null]
+  role varchar [not null]
+}
+
+Table "Order" {
+  id varchar [primary key, not null]
+  date datetime [not null]
+  total_price double [not null]
+  state varchar [not null]
+
+  user_id varchar [not null, ref: > User.id]
+}
+
+Table Product {
+  id varchar [primary key, not null]
+  name varchar [not null]
+  description varchar [not null]
+  price double [not null]
+  image varchar
+  total_available int [not null]
+
+  drop_id varchar [not null, ref: > Drop.id]
+}
+
+Table ord_prod {
+  id varchar [primary key, not null]
+
+  order_id varchar [not null, ref: > "Order".id]
+  product_id varchar [not null, ref: > Product.id]
+
+  quantity int [not null]
+  price double [not null]
+}
+
+Table Payment {
+  id varchar [primary key, not null]
+  amount_paid double [not null]
+  date datetime [not null]
+  state varchar [not null]
+  order_id varchar [not null, unique, ref: > "Order".id]
+}
+
+Table Drop {
+  id varchar [primary key, not null]
+  start_date_time datetime [not null]
+  end_date_time datetime [not null]
+}
