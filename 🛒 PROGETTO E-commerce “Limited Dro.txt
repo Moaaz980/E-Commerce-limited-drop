@@ -1,0 +1,185 @@
+🛒 PROGETTO: E-commerce “Limited Drop”
+📌 Descrizione generale
+
+Realizzare una piattaforma di e-commerce web in cui i prodotti vengono venduti tramite campagne temporanee (“drop”) con disponibilità limitata.
+
+Il sistema deve consentire la gestione completa del ciclo di acquisto: dalla visualizzazione dei prodotti fino al pagamento e alla gestione degli ordini.
+
+🎯 Obiettivi
+Implementare un sistema di vendita con vincoli temporali e di disponibilità
+Garantire consistenza dei dati in presenza di accessi concorrenti
+Separare frontend e backend tramite API REST
+Integrare un sistema di autenticazione e pagamento
+
+
+
+🧑‍💻 Attori del sistema
+Utente non autenticato
+Utente autenticato
+Amministratore
+📌 Requisiti funzionali
+1. 👤 Gestione utenti
+
+Il sistema deve permettere:
+
+Registrazione utente
+Login/logout
+Autenticazione tramite credenziali
+Autenticazione tramite provider esterno (es. Google via Google Identity Services)
+
+Ogni utente autenticato deve poter:
+
+visualizzare il proprio profilo
+consultare lo storico ordini
+2. 🛍️ Gestione prodotti
+
+Il sistema deve permettere:
+Visualizzazione elenco prodotti
+Visualizzazione dettaglio prodotto
+
+Ogni prodotto deve avere:
+
+nome
+descrizione
+prezzo
+immagine
+quantità disponibile
+riferimento a un “drop”
+3. ⏳ Gestione Drop
+
+Un “drop” rappresenta una finestra temporale di vendita.
+
+Ogni drop deve avere:
+
+data/ora di inizio
+data/ora di fine
+
+Vincoli:
+
+un prodotto è acquistabile solo se:
+il drop è attivo
+il prodotto è disponibile 
+4. 🛒 Carrello
+
+Il sistema deve permettere all’utente autenticato di:
+
+aggiungere prodotti al carrello
+rimuovere prodotti dal carrello
+modificare quantità
+visualizzare il carrello
+
+Vincoli:
+
+non è possibile aggiungere prodotti non disponibili
+il carrello deve essere persistente lato server
+5. 📦 Ordini
+
+Il sistema deve permettere:
+
+creazione ordine a partire dal carrello
+salvataggio ordine nel sistema
+visualizzazione storico ordini
+visualizzazione dettaglio ordine
+
+Ogni ordine deve contenere:
+
+lista prodotti
+quantità
+prezzo totale
+stato ordine (es. pending, paid, failed)
+6. 💳 Pagamenti
+
+Il sistema deve integrare un provider esterno di pagamento (es. Stripe)
+
+Funzionalità richieste:
+
+avvio pagamento
+gestione esito pagamento:
+successo
+fallimento
+
+Il sistema deve aggiornare lo stato dell’ordine in base all’esito.
+
+7. 🔐 Autorizzazione
+Solo utenti autenticati possono effettuare acquisti
+Solo amministratori possono:
+creare/modificare/eliminare prodotti
+gestire i drop
+⚠️ Requisiti non funzionali
+Consistenza e concorrenza
+Il sistema deve evitare condizioni di race:
+due utenti non devono acquistare lo stesso ultimo prodotto
+Lo stock deve essere aggiornato in modo atomico
+Sicurezza
+Validazione input lato backend
+Protezione delle API
+Gestione sicura dell’autenticazione
+Prestazioni
+Gestione efficiente delle richieste concorrenti
+Ottimizzazione delle query database
+Architettura
+Separazione frontend/backend
+Comunicazione tramite API REST
+Struttura modulare del backend
+🧱 Vincoli tecnologici
+Backend: Spring Boot
+Frontend: Angular
+Database: MySQL
+⭐ Requisiti opzionali (bonus)
+Dashboard amministratore
+Sistema di notifiche (email o UI)
+Countdown per i drop
+Sistema di recensioni prodotti
+Filtri e ricerca avanzata
+Wishlist
+🧪 Casi limite da gestire
+acquisto simultaneo dell’ultimo prodotto
+pagamento fallito dopo creazione ordine
+drop scaduto durante checkout
+utente non autenticato che tenta acquisto
+📦 Deliverable
+codice sorgente completo
+documentazione API
+schema database
+istruzioni per esecuzione
+applicazione deployata (opzionale ma consigliato)
+🎓 Criteri di valutazione
+correttezza funzionale
+qualità della progettazione
+gestione dei casi limite
+chiarezza del codice
+struttura dell’architettura
+
+
+Termini da sapere: 
+- stock : quantità di prodotti disponibili in magazzino. 
+- high stock : disponibile con quantità alta 
+- low stock: disponibile con quantità bassa.
+- out of stock: non disponibile
+
+- Drop significa rilascio dei prodotti lancio 
+- limited pochi pezzi disponibili 
+
+un limited drop: 
+È quando un brand mette in vendita pochi prodotti , per poco tempo , e poi non li rimetterà subito in stock.
+
+
+Quindi io ho: 
+- Un sistema di vendita web. dove i prodotti disponibili sono pochi e per poco tempo. 
+- Registrazione e autenticazione utente , con credenziali e anche tramite provider esterno come Google.
+- Ho diversi attori nel sistema. con diversi ruoli . Quindi vanno gestiti i ruoli.
+- Vincolo tecnologico FE : angularJs . Interfaccia coerente e semplice.
+- Vincolo tecnologico BE: Java Spring Boot. 
+- Comunicazione tramite API Rest.
+- Ottimizzazione query database. (index).
+- Uso del pattern interfaccia e implementazione lato back-end.
+- Spring Security per autenticazione e gestione ruoli utente
+- Uso del pattern DTO (data transfer object) per trasformare da entità a DTo , per garantire l'isolamento dell'entità
+- Map struct per il processo di trasformazione da Entità a Dto.
+- application yaml per i parametri di configurazione dell'app.
+- Jpa and Hibernate per la persistenza dei dati.
+- Seguire l'architettura a strati lato back-end (entity , repository , service , controller)
+
+
+
+
