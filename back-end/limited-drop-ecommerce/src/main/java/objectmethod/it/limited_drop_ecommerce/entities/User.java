@@ -36,4 +36,7 @@ public class User {
     UserRole role;
     @OneToMany(mappedBy = "user")
     List<Order> orders;
+    @OneToOne
+    @JoinColumn(name = "trolley_id")
+    Trolley trolley;
 }

@@ -30,4 +30,7 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "user_id" , referencedColumnName = "id")
     User user;
+    @OneToOne
+    @JoinColumn(name = "payment_id")
+    Payment payment;
 }

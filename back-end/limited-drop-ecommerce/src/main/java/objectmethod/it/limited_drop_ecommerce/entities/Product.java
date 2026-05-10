@@ -35,4 +35,7 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "drop_id" , referencedColumnName = "id")
     Drop drop;
+    @ManyToOne
+    @JoinColumn(name = "trolley_id")
+    Trolley trolley;
 }
