@@ -8,6 +8,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
+import java.util.List;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -35,7 +37,8 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "drop_id" , referencedColumnName = "id")
     Drop drop;
-    @ManyToOne
-    @JoinColumn(name = "trolley_id")
-    Trolley trolley;
+    @OneToMany(mappedBy = "product")
+    List<TrolleyProduct> tro_pro;
+    @OneToMany(mappedBy = "product")
+    List<Order> orderProducts;
 }

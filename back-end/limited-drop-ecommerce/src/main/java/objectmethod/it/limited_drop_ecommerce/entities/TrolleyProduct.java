@@ -16,5 +16,10 @@ public class TrolleyProduct {
     @Id
     @GeneratedValue (strategy = GenerationType.UUID)
     String id;
-
+    @ManyToOne
+    @JoinColumn(name = "trolley_id")
+    Trolley trolley;
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    Product product;
 }

@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import objectmethod.it.limited_drop_ecommerce.enums.OrderState;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Data
@@ -33,4 +34,6 @@ public class Order {
     @OneToOne
     @JoinColumn(name = "payment_id")
     Payment payment;
+    @OneToMany(mappedBy = "order")
+    List<OrderProduct> orderProducts;
 }

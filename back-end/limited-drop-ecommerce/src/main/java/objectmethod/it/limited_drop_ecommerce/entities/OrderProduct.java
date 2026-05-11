@@ -6,23 +6,23 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
-
-import java.util.List;
+import java.math.BigDecimal;
 
 @Entity
 @Data
 @NoArgsConstructor
 @FieldDefaults (level = AccessLevel.PRIVATE)
-@Table (name = "trolley")
-public class Trolley {
+@Table (name = "ord_prod")
+public class OrderProduct {
     @Id
     @GeneratedValue (strategy = GenerationType.UUID)
     String id;
-    @Column(name = "total_items" , nullable = false)
-    Integer totalItems;
-    @OneToOne(mappedBy = "trolley")
-    User user;
-    @OneToMany(mappedBy = "trolley")
-    List<TrolleyProduct> products;
+    Integer quantity;
+    BigDecimal price;
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    Order order;
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    Product product;
 }
-
