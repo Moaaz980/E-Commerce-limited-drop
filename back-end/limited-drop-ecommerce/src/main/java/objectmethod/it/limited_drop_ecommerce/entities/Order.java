@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import objectmethod.it.limited_drop_ecommerce.enums.OrderState;
+
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -24,9 +26,10 @@ public class Order {
     LocalDateTime date;
     @NotNull
     @Column(nullable = false , name = "total_price")
-    Double totalPrice;
+    BigDecimal totalPrice;
     @NotNull
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     OrderState state;
     @ManyToOne
     @JoinColumn(name = "user_id" , referencedColumnName = "id")

@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
@@ -27,7 +28,7 @@ public class Product {
     String description;
     @NotNull
     @Column(nullable = false)
-    Double price;
+    BigDecimal price;
     @NotNull
     @Column(nullable = false)
     String image;

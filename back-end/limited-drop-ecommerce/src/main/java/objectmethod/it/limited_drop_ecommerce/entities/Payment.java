@@ -24,6 +24,7 @@ public class Payment {
     @Column(name = "date_time" , nullable = false)
     LocalDateTime dateTime;
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     PaymentStatus state;
     @OneToOne(mappedBy = "payment")
     Order order;
