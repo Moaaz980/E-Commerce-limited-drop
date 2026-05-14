@@ -20,7 +20,8 @@ public class Trolley {
     String id;
     @Column(name = "total_items" , nullable = false)
     Integer totalItems;
-    @OneToOne(mappedBy = "trolley")
+    @OneToOne
+    @JoinColumn(name = "user_id")
     User user;
     @OneToMany(mappedBy = "trolley")
     List<TrolleyProduct> products;

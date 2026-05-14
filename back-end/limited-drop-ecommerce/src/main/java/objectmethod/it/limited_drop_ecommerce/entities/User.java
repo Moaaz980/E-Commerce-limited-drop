@@ -1,5 +1,6 @@
 package objectmethod.it.limited_drop_ecommerce.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
@@ -29,6 +30,7 @@ public class User {
     String email;
     @NotNull
     @Column(nullable = false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     String password;
     @NotNull
     @Column(nullable = false)
@@ -36,7 +38,6 @@ public class User {
     UserRole role;
     @OneToMany(mappedBy = "user")
     List<Order> orders;
-    @OneToOne
-    @JoinColumn(name = "trolley_id")
+    @OneToOne(mappedBy = "user")
     Trolley trolley;
 }

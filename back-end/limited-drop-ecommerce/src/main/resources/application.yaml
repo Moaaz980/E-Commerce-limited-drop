@@ -12,3 +12,16 @@ spring:
       ddl-auto: none
     show-sql: true
     database-platform: org.hibernate.dialect.MySQLDialect
+
+# Context path
+
+server:
+  servlet:
+    context-path: /api
+
+logging:
+  level:
+    root: INFO
+    objectmethod:
+      it:
+        limited_drop_ecommerce: DEBUG

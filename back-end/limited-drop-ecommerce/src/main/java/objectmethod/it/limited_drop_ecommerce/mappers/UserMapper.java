@@ -7,7 +7,7 @@ import org.mapstruct.Mapper;
 
 import java.util.List;
 
-@Mapper (componentModel = "spring")
+@Mapper (componentModel = "spring" , uses = {OrderMapper.class , TrolleyMapper.class})
 public interface UserMapper {
 
     User toUser(UserDto userDto);

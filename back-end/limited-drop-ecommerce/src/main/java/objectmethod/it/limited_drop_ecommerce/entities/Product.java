@@ -41,5 +41,5 @@ public class Product {
     @OneToMany(mappedBy = "product")
     List<TrolleyProduct> tro_pro;
     @OneToMany(mappedBy = "product")
-    List<Order> orderProducts;
+    List<OrderProduct> orderProducts;
 }

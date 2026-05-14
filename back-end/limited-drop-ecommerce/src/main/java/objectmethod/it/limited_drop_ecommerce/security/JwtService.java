@@ -9,9 +9,9 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import objectmethod.it.limited_drop_ecommerce.Constants;
-import objectmethod.it.limited_drop_ecommerce.dtos.model.UserDto;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+
+import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
 
@@ -20,16 +20,16 @@ import java.util.Date;
 @FieldDefaults(level = AccessLevel.PRIVATE , makeFinal = true)
 public class JwtService {
 
-    Key key = Keys.hmacShaKeyFor(Constants.JWT_SECRET.getBytes());
+    Key key = Keys.hmacShaKeyFor(Constants.JWT_SECRET.getBytes(StandardCharsets.UTF_8));
 
-    public String generateToken(UserDto user) {
+    public String generateToken(CustomDetails user) {
         return Jwts
                 .builder()
-                .setSubject(user.getEmail())
+                .setSubject(user.getUsername())
                 .setExpiration(new Date(System.currentTimeMillis() + Constants.EXPIRATION))
                 .setIssuedAt(new Date())
                 .setId(user.getId())
-                .claim(Constants.ROLE , user.getRole())
+                .claim(Constants.ROLE , user.getAuthorities())
                 .signWith(key , SignatureAlgorithm.HS256)
                 .compact();
     }
@@ -58,7 +58,7 @@ public class JwtService {
         return getExpirationDateFromToken(token).before(new Date());
     }
 
-    public boolean validateToken(String token , UserDetails userDetails)  {
+    public boolean validateToken(String token , CustomDetails userDetails)  {
         try {
             Claims claim = Jwts
                     .parserBuilder()

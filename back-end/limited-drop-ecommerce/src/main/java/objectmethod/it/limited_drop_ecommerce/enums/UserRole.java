@@ -1,3 +1,6 @@
 package objectmethod.it.limited_drop_ecommerce.enums;
 
-public enum UserRole {ADMIN , USER}
+public enum UserRole {
+    ADMIN ,
+    USER
+}

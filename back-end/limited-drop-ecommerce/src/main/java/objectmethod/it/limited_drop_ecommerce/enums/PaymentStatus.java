@@ -1,3 +1,6 @@
 package objectmethod.it.limited_drop_ecommerce.enums;
 
-public enum PaymentStatus {CONFIRMED , FAILED}
+public enum PaymentStatus {
+    CONFIRMED ,
+    FAILED
+}
