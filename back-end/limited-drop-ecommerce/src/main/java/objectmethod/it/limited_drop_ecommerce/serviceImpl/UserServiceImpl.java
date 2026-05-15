@@ -5,9 +5,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import objectmethod.it.limited_drop_ecommerce.dtos.model.UserDto;
+import objectmethod.it.limited_drop_ecommerce.dtos.request.AdminCreationRequestDto;
 import objectmethod.it.limited_drop_ecommerce.dtos.request.LoginRequestDto;
+import objectmethod.it.limited_drop_ecommerce.dtos.request.RegisterRequestDto;
+import objectmethod.it.limited_drop_ecommerce.dtos.response.AdminCreationResponseDto;
 import objectmethod.it.limited_drop_ecommerce.dtos.response.LoginResponseDto;
+import objectmethod.it.limited_drop_ecommerce.dtos.response.RegistrationResponseDto;
 import objectmethod.it.limited_drop_ecommerce.entities.User;
+import objectmethod.it.limited_drop_ecommerce.enums.UserRole;
 import objectmethod.it.limited_drop_ecommerce.exceptions.ApiException;
 import objectmethod.it.limited_drop_ecommerce.mappers.UserMapper;
 import objectmethod.it.limited_drop_ecommerce.repositories.UserRepository;
@@ -58,22 +63,50 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto createUser(UserDto userInformation) {
-        log.info("Utente {} si sta registrando" , userInformation.getEmail());
+    public RegistrationResponseDto createUser(RegisterRequestDto userInformation) {
+        log.info("Utente {} si sta registrando", userInformation.getEmail());
+        Optional < User > user = userRepository.findByEmail(userInformation.getEmail());
+        // controllo se utente esiste già per evitare duplicati
+        if (user.isPresent()) {
+            log.info("Utente : {} esiste gia", userInformation.getEmail());
+            throw new ApiException("User already exists", HttpStatus.CONFLICT);
+        }
+        // controllo se le password combaciano
+        if (!userInformation.getPassword().equals(userInformation.getConfirmPassword())) {
+            log.info("Le password non combaciano");
+            throw new ApiException("Passwords do not match", HttpStatus.BAD_REQUEST);
+        }
+        User utente = userMapper.toUser(userInformation);
+        utente.setPassword(passwordEncoder.encode(userInformation.getPassword()));
+        utente.setRole(UserRole.USER);
+        User createdUser = userRepository.save(utente);
+        log.info("User : {} creato con successo", createdUser.getEmail());
+        return userMapper.toRegistrationResponseDto(createdUser);
+    }
 
+    @Override
+    public AdminCreationResponseDto createUserAdmin(AdminCreationRequestDto userInformation) {
+        log.info("Admin crea un utenza admin", userInformation.getEmail());
         Optional<User> user = userRepository.findByEmail(userInformation.getEmail());
-
-        if (user.isEmpty()) {
-            User utente = userMapper.toUser(userInformation);
-            utente.setPassword(passwordEncoder.encode(utente.getPassword()));
-            User createdUser = userRepository.save(utente);
-            log.info("User : {} creato con successo" , createdUser.getEmail());
-            return userMapper.toUserDto(createdUser);
+        // controllo se utente esiste già per evitare duplicati
+        if (user.isPresent()) {
+            log.info("admin : {} esiste gia", userInformation.getEmail());
+            throw new ApiException("User already exists", HttpStatus.CONFLICT);
         }
-        else {
-            throw new ApiException("User already exists" , HttpStatus.CONFLICT);
+        // controllo se le password combaciano
+        if (!userInformation.getPassword().equals(userInformation.getConfirmPassword())) {
+            log.info("Le password non combaciano");
+            throw new ApiException("Passwords do not match", HttpStatus.BAD_REQUEST);
         }
+        User utente = userMapper.toUser(userInformation);
+        utente.setPassword(passwordEncoder.encode(userInformation.getPassword()));
+        utente.setRole(UserRole.ADMIN);
+        User createdUser = userRepository.save(utente);
+        log.info("admin : {} creato con successo", createdUser.getEmail());
+        return userMapper.toAdminCreationResponseDto(createdUser);
     }
 
 
 }
+
+
