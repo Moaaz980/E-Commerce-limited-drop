@@ -4,7 +4,6 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-import objectmethod.it.limited_drop_ecommerce.dtos.model.UserDto;
 import objectmethod.it.limited_drop_ecommerce.dtos.request.AdminCreationRequestDto;
 import objectmethod.it.limited_drop_ecommerce.dtos.request.LoginRequestDto;
 import objectmethod.it.limited_drop_ecommerce.dtos.request.RegisterRequestDto;
@@ -24,10 +23,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
 
 @Service
