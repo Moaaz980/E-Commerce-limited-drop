@@ -36,6 +36,7 @@ public class User {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     UserRole role;
+    String sub;
     @OneToMany(mappedBy = "user")
     List<Order> orders;
     @OneToOne(mappedBy = "user")

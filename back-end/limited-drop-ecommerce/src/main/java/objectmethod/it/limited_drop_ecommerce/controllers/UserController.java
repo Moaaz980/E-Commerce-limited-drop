@@ -10,9 +10,11 @@ import objectmethod.it.limited_drop_ecommerce.dtos.request.RegisterRequestDto;
 import objectmethod.it.limited_drop_ecommerce.dtos.response.AdminCreationResponseDto;
 import objectmethod.it.limited_drop_ecommerce.dtos.response.LoginResponseDto;
 import objectmethod.it.limited_drop_ecommerce.dtos.response.RegistrationResponseDto;
+import objectmethod.it.limited_drop_ecommerce.dtos.response.UserProfileDto;
 import objectmethod.it.limited_drop_ecommerce.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -39,6 +41,13 @@ public class UserController {
     public ResponseEntity< AdminCreationResponseDto> adminCreation(@Valid @RequestBody AdminCreationRequestDto adminInf) {
         AdminCreationResponseDto res = userService.createUserAdmin(adminInf);
         return ResponseEntity.status(HttpStatus.CREATED).body(res);
+    }
+
+    @GetMapping("/users")
+    public ResponseEntity<UserProfileDto> getUserProfile() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        UserProfileDto res = userService.viewUserDetails(username);
+        return ResponseEntity.ok(res);
     }
 
 }

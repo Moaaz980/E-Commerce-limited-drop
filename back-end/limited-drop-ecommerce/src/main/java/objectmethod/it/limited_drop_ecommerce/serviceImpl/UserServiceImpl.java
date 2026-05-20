@@ -10,6 +10,7 @@ import objectmethod.it.limited_drop_ecommerce.dtos.request.RegisterRequestDto;
 import objectmethod.it.limited_drop_ecommerce.dtos.response.AdminCreationResponseDto;
 import objectmethod.it.limited_drop_ecommerce.dtos.response.LoginResponseDto;
 import objectmethod.it.limited_drop_ecommerce.dtos.response.RegistrationResponseDto;
+import objectmethod.it.limited_drop_ecommerce.dtos.response.UserProfileDto;
 import objectmethod.it.limited_drop_ecommerce.entities.User;
 import objectmethod.it.limited_drop_ecommerce.enums.UserRole;
 import objectmethod.it.limited_drop_ecommerce.exceptions.ApiException;
@@ -23,6 +24,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
@@ -31,7 +33,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE , makeFinal = true)
 @Slf4j
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService  {
     JwtService jwtService;
     AuthenticationManager authenticationManager;
     UserMapper userMapper;
@@ -102,6 +104,18 @@ public class UserServiceImpl implements UserService {
         log.info("admin : {} creato con successo", createdUser.getEmail());
         return userMapper.toAdminCreationResponseDto(createdUser);
     }
+
+    @Override
+    public UserProfileDto viewUserDetails(String name) {
+        log.info("Utente: {} vuole vedere suo profilo" , name);
+        User utente = userRepository.findByEmail(name).orElseThrow(
+                () ->  new UsernameNotFoundException("User not exists")
+        );
+        UserProfileDto userDetails = userMapper.toUserProfileDto(utente);
+        log.info("Nome profilo utente: {}" , userDetails.getEmail());
+        return userDetails;
+    }
+
 
 
 }

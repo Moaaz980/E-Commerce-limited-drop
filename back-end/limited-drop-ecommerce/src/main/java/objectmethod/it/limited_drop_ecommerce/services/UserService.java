@@ -6,9 +6,11 @@ import objectmethod.it.limited_drop_ecommerce.dtos.request.RegisterRequestDto;
 import objectmethod.it.limited_drop_ecommerce.dtos.response.AdminCreationResponseDto;
 import objectmethod.it.limited_drop_ecommerce.dtos.response.LoginResponseDto;
 import objectmethod.it.limited_drop_ecommerce.dtos.response.RegistrationResponseDto;
+import objectmethod.it.limited_drop_ecommerce.dtos.response.UserProfileDto;
 
 public interface UserService {
     LoginResponseDto authUser(LoginRequestDto credentials);
     RegistrationResponseDto createUser(RegisterRequestDto userInformation);
     AdminCreationResponseDto createUserAdmin(AdminCreationRequestDto adminInformation);
+    UserProfileDto viewUserDetails(String name);
 }

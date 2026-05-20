@@ -12,7 +12,6 @@ import java.util.List;
 
 @RestControllerAdvice
 public class ValidationExceptionHandling {
-
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<List<ErrorResponseDto>> handleValidationException(MethodArgumentNotValidException ex) {
         List<FieldError> fieldErrors = ex.getFieldErrors();

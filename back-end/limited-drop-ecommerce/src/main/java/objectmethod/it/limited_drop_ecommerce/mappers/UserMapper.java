@@ -6,6 +6,7 @@ import objectmethod.it.limited_drop_ecommerce.dtos.request.AdminCreationRequestD
 import objectmethod.it.limited_drop_ecommerce.dtos.request.RegisterRequestDto;
 import objectmethod.it.limited_drop_ecommerce.dtos.response.AdminCreationResponseDto;
 import objectmethod.it.limited_drop_ecommerce.dtos.response.RegistrationResponseDto;
+import objectmethod.it.limited_drop_ecommerce.dtos.response.UserProfileDto;
 import objectmethod.it.limited_drop_ecommerce.entities.User;
 import org.mapstruct.Mapper;
 
@@ -22,4 +23,5 @@ public interface UserMapper {
     RegistrationResponseDto toRegistrationResponseDto(User user);
     User toUser(AdminCreationRequestDto user);
     AdminCreationResponseDto toAdminCreationResponseDto(User user);
+    UserProfileDto toUserProfileDto(User user);
 }

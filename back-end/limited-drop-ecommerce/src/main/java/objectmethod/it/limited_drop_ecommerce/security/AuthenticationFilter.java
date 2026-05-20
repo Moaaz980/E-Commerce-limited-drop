@@ -19,14 +19,15 @@ import java.io.IOException;
 @RequiredArgsConstructor
 @FieldDefaults(makeFinal = true , level = AccessLevel.PRIVATE)
 public class AuthenticationFilter extends OncePerRequestFilter {
-
     JwtService jwtService;
     CustomUserDetailsService userDetailsService;
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         return request.getRequestURI().startsWith("/api/auth/login") ||
-                request.getRequestURI().startsWith("/api/auth/register");
+                request.getRequestURI().startsWith("/api/auth/register") ||
+                request.getRequestURI().startsWith("/oauth2/authorization/**") ||
+                request.getRequestURI().startsWith("/login/oauth2/code/**");
     }
 
     @Override

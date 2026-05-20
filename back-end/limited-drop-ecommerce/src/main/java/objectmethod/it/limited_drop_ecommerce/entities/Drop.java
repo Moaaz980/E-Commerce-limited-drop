@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @FieldDefaults (level = AccessLevel.PRIVATE)
-@Table (name = "drop")
+@Table (name = "drops")
 public class Drop {
     @Id
     @GeneratedValue (strategy = GenerationType.UUID)

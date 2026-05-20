@@ -5,15 +5,19 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import jakarta.persistence.GenerationType;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import objectmethod.it.limited_drop_ecommerce.Constants;
+import objectmethod.it.limited_drop_ecommerce.serviceImpl.CustomOAuth2User;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
-
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -30,6 +34,17 @@ public class JwtService {
                 .setIssuedAt(new Date())
                 .setId(user.getId())
                 .claim(Constants.ROLE , user.getAuthorities())
+                .signWith(key , SignatureAlgorithm.HS256)
+                .compact();
+    }
+
+    public String generateToken(CustomOAuth2User customOAuth2User) {
+        return Jwts
+                .builder()
+                .setSubject(customOAuth2User.getUser().getEmail())
+                .setExpiration(new Date(System.currentTimeMillis() +  Constants.EXPIRATION))
+                .setId(customOAuth2User.getUser().getId())
+                .claim(Constants.ROLE , customOAuth2User.getUser().getRole())
                 .signWith(key , SignatureAlgorithm.HS256)
                 .compact();
     }
@@ -52,6 +67,18 @@ public class JwtService {
                 .parseClaimsJws(token)
                 .getBody()
                 .getExpiration();
+    }
+
+    public List<GrantedAuthority> getAuthoritiesFromToken(String token) {
+        List<GrantedAuthority> authorities = Collections.singletonList((GrantedAuthority) List.of(Jwts
+                .parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .get(Constants.ROLE)
+        ));
+        return authorities;
     }
 
     public boolean isTokenExpired(String token) {

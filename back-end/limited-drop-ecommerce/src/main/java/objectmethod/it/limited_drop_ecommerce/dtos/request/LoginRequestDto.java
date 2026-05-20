@@ -1,6 +1,5 @@
 package objectmethod.it.limited_drop_ecommerce.dtos.request;
 
-import jakarta.validation.constraints.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;

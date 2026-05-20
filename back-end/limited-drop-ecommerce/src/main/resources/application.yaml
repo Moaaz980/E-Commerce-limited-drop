@@ -12,6 +12,24 @@ spring:
       ddl-auto: none
     show-sql: true
     database-platform: org.hibernate.dialect.MySQLDialect
+  application:
+    name: Limited-Drop-E-Commerce
+
+    # OAuth2
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 733021456309-lhckmhiuaj4f6kt3life1t8m53dh9o4l.apps.googleusercontent.com
+            client-secret: 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
+            scope:
+              - email
+              - profile
+              - openid
+            redirect-uri: "{baseUrl}/login/oauth2/authorization/{registrationId}"
+            authorization-grant-type: authorization_code
+
 
 # Context path
 
@@ -19,9 +37,19 @@ server:
   servlet:
     context-path: /api
 
+# Logging
 logging:
   level:
     root: INFO
     objectmethod:
       it:
         limited_drop_ecommerce: DEBUG
+kind: Application
+
+
+
+
+
+
+
+
