@@ -50,10 +50,10 @@ public class UserServiceImpl implements UserService  {
                             , credentials.getPassword()
                     )
             );
-            log.debug("Login riuscito per utente {}" , credentials.getUsername());
+            log.debug("Login riuscito");
             CustomDetails userDetails = (CustomDetails) authentication.getPrincipal();
             String token = jwtService.generateToken(userDetails);
-            log.info("Token utente : {}" , token);
+            log.debug("Token generato");
             return new LoginResponseDto(token);
         } catch (AuthenticationException e) {
             log.warn("Login fallito per utente: {}" , credentials.getUsername());
@@ -67,12 +67,12 @@ public class UserServiceImpl implements UserService  {
         Optional < User > user = userRepository.findByEmail(userInformation.getEmail());
         // controllo se utente esiste già per evitare duplicati
         if (user.isPresent()) {
-            log.info("Utente : {} esiste gia", userInformation.getEmail());
+            log.warn("Utente : {} esiste gia", userInformation.getEmail());
             throw new ApiException("User already exists", HttpStatus.CONFLICT);
         }
         // controllo se le password combaciano
         if (!userInformation.getPassword().equals(userInformation.getConfirmPassword())) {
-            log.info("Le password non combaciano");
+            log.warn("Le password non combaciano");
             throw new ApiException("Passwords do not match", HttpStatus.BAD_REQUEST);
         }
         User utente = userMapper.toUser(userInformation);
@@ -89,12 +89,12 @@ public class UserServiceImpl implements UserService  {
         Optional<User> user = userRepository.findByEmail(userInformation.getEmail());
         // controllo se utente esiste già per evitare duplicati
         if (user.isPresent()) {
-            log.info("admin : {} esiste gia", userInformation.getEmail());
+            log.warn("admin : {} esiste gia", userInformation.getEmail());
             throw new ApiException("User already exists", HttpStatus.CONFLICT);
         }
         // controllo se le password combaciano
         if (!userInformation.getPassword().equals(userInformation.getConfirmPassword())) {
-            log.info("Le password non combaciano");
+            log.warn("Le password non combaciano");
             throw new ApiException("Passwords do not match", HttpStatus.BAD_REQUEST);
         }
         User utente = userMapper.toUser(userInformation);

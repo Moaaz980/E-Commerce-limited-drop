@@ -58,6 +58,7 @@ public class SecurityConfig {
                         .requestMatchers( "/login/oauth2/code/**").permitAll()
                         .requestMatchers(HttpMethod.GET , "/products").hasRole("USER")
                         .requestMatchers(HttpMethod.GET , "/products/{id}").hasRole("USER")
+                        .requestMatchers(HttpMethod.POST , "/products").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                     .oauth2Login(oauth2 ->oauth2

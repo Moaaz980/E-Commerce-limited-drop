@@ -1,6 +1,7 @@
 package objectmethod.it.limited_drop_ecommerce.exceptions.handling;
 
 
+import lombok.extern.slf4j.Slf4j;
 import objectmethod.it.limited_drop_ecommerce.dtos.response.ErrorResponseDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestControllerAdvice
+@Slf4j
 public class ValidationExceptionHandling {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<List<ErrorResponseDto>> handleValidationException(MethodArgumentNotValidException ex) {
@@ -23,6 +25,7 @@ public class ValidationExceptionHandling {
             errRes.setMessage(fieldErr.getDefaultMessage());
             validationErrorResponses.add(errRes);
         }
+        log.warn("Ci sono : {} errori di validazione" , validationErrorResponses.size());
         return ResponseEntity.badRequest().body(validationErrorResponses);
     }
 
