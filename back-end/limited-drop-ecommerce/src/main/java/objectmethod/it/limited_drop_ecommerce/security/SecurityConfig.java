@@ -59,6 +59,10 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET , "/products").hasRole("USER")
                         .requestMatchers(HttpMethod.GET , "/products/{id}").hasRole("USER")
                         .requestMatchers(HttpMethod.POST , "/products").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST , "/drops").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT , "/products/{id}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE , "/products/{id}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET , "/{id}/disponibile").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                     .oauth2Login(oauth2 ->oauth2

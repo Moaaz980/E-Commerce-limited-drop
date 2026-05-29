@@ -6,6 +6,8 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
+
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 @Entity
@@ -19,8 +21,8 @@ public class Drop {
     String id;
     @NotNull
     @Column(nullable = false , name = "start_date_time")
-    LocalDateTime startDateTime;
+    Instant startDateTime;
     @NotNull
     @Column(nullable = false , name = "end_date_time")
-    LocalDateTime endDateTime;
+    Instant endDateTime;
 }
