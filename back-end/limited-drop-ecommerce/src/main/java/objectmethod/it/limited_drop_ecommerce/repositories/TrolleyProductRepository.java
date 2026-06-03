@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TrolleyProductRepository extends JpaRepository <TrolleyProduct, String> {
+    int countProductByTrolleyId(String trolleyId);
 }
 
 

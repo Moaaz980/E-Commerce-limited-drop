@@ -5,7 +5,7 @@ import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import objectmethod.it.limited_drop_ecommerce.dtos.model.DropDto;
+import objectmethod.it.limited_drop_ecommerce.dtos.response.DropDto;
 import objectmethod.it.limited_drop_ecommerce.dtos.request.DropCreationDto;
 import objectmethod.it.limited_drop_ecommerce.services.DropService;
 import org.springframework.http.HttpStatus;

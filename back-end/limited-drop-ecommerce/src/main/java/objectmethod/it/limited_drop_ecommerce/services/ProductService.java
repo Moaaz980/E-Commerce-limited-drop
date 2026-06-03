@@ -12,5 +12,4 @@ public interface ProductService {
     ProductDto updateProduct(String productId , ProductUpdateDto productUpdateDto);
     void deleteProduct(String productId);
     boolean isItAvailableForPurchase(String productId);
-
 }

@@ -5,7 +5,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
-import objectmethod.it.limited_drop_ecommerce.dtos.model.DropDto;
+
 import java.math.BigDecimal;
 
 @Data

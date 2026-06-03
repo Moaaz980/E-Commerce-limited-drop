@@ -99,8 +99,8 @@ public class ProductServiceImpl implements ProductService {
         log.info("Controllo prodotto : {} , se è disponibile" , productId);
         boolean isValid =  productRepository.isPossibileToPurchase(productId);
         if (!isValid) {
-            log.warn("Non è possibile acquistare questo prodotto ,  non disponibile");
-            throw new ApiException("Non è possibile acquistare prodtto , non disponibile", HttpStatus.BAD_REQUEST);
+            log.warn("Non è possibile acquistare questo prodotto non disponibile");
+            throw new ApiException("Prodotto non disponibile", HttpStatus.BAD_REQUEST);
         }
         log.debug("Prodotto : {}  è acquistabile : {}" , productId ,  true);
         return isValid;

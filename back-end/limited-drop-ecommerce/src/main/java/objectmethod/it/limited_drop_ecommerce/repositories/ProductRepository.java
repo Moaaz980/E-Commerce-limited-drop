@@ -23,8 +23,8 @@ public interface ProductRepository extends JpaRepository <Product, String> {
                 "FROM Drop dr " +
                 "WHERE dr.id = pr.drop.id " +
                 "AND CURRENT_TIMESTAMP BETWEEN dr.startDateTime AND dr.endDateTime " +
-                ") " +
-                ") "
+                ")" +
+                ")"
     )
     boolean isPossibileToPurchase(@Param("id") String id);
 }

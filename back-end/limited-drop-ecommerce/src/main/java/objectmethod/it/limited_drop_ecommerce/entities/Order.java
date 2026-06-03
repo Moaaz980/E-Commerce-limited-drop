@@ -16,7 +16,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "order")
+@Table(name = "orders")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -34,9 +34,8 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "user_id" , referencedColumnName = "id")
     User user;
-    @OneToOne
-    @JoinColumn(name = "payment_id")
-    Payment payment;
     @OneToMany(mappedBy = "order")
     List<OrderProduct> orderProducts;
+    @OneToOne(mappedBy = "order")
+    Payment payment;
 }

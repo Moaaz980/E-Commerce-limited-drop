@@ -5,7 +5,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-import objectmethod.it.limited_drop_ecommerce.dtos.model.DropDto;
+import objectmethod.it.limited_drop_ecommerce.dtos.response.DropDto;
 import objectmethod.it.limited_drop_ecommerce.dtos.request.DropCreationDto;
 import objectmethod.it.limited_drop_ecommerce.entities.Drop;
 import objectmethod.it.limited_drop_ecommerce.exceptions.ApiException;
@@ -37,4 +37,7 @@ public class DropServiceImpl implements DropService {
         log.debug("Drop : {} creato con successo" , createdDrop.getId());
         return dropMapper.toDto(createdDrop);
     }
+
+
+
 }

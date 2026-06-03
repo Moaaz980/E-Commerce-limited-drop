@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import objectmethod.it.limited_drop_ecommerce.dtos.response.TrolleyDto;
 import objectmethod.it.limited_drop_ecommerce.enums.UserRole;
 import java.util.List;
 

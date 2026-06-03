@@ -26,6 +26,7 @@ public class Payment {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     PaymentStatus state;
-    @OneToOne(mappedBy = "payment")
+    @OneToOne
+    @JoinColumn(name = "order_id")
     Order order;
 }
