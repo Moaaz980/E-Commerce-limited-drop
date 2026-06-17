@@ -21,5 +21,5 @@ public class UserDto {
     String password;
     UserRole role;
     List<OrderDto> orders;
-    TrolleyDto trolley;
+    String trolleyId;
 }

@@ -9,6 +9,7 @@ import objectmethod.it.limited_drop_ecommerce.dtos.response.RegistrationResponse
 import objectmethod.it.limited_drop_ecommerce.dtos.response.UserProfileDto;
 import objectmethod.it.limited_drop_ecommerce.entities.User;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ import java.util.List;
 public interface UserMapper {
 
     User toUser(UserDto userDto);
+    @Mapping(source = "trolley.id" , target = "trolleyId")
     UserDto toUserDto(User user);
     List<UserDto> toListUserDto(List <User> users);
     List<User> toListUser(List<UserDto> usersDto);

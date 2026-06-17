@@ -12,5 +12,5 @@ import objectmethod.it.limited_drop_ecommerce.dtos.model.UserDto;
 public class TrolleyDto {
     String id;
     Integer totalItems;
-    UserDto userDto;
+    String userId;
 }

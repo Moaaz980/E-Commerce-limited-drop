@@ -21,8 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class TrolleyController {
     TrolleyService trolleyService;
 
-    @PostMapping("/{productId}")
-    public ResponseEntity<TrolleyDto> addProductToCarousel(@PathVariable("productId") String productId) {
+    @PostMapping("/{id}")
+    public ResponseEntity<TrolleyDto> addProductToCarousel(@PathVariable("id") String productId) {
         CustomDetails authenticatedUser = (CustomDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         TrolleyDto res = trolleyService.addToCarousel(productId , authenticatedUser.getId());
         return ResponseEntity.ok(res);

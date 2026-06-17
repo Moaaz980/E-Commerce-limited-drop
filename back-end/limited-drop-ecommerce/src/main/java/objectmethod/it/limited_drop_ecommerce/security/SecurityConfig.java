@@ -63,7 +63,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT , "/products/{id}").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE , "/products/{id}").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET , "/{id}/disponibile").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.POST , "/carousels/{productId}").hasRole("USER")
+                        .requestMatchers(HttpMethod.POST , "/carousels/{id}").hasRole("USER")
                         .anyRequest().authenticated()
                 )
                     .oauth2Login(oauth2 ->oauth2

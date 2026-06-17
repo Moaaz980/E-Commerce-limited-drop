@@ -53,16 +53,18 @@ public class TrolleyServiceImpl implements TrolleyService {
             log.info("Prodotto valido per l'acquisto");
             trolley = userTrolley(userId);
             int totalTrolleyItems = getTotalItemsForTrolley(trolley.getId());
+            trolley.setTotalItems(totalTrolleyItems);
             TrolleyProduct trolleyProduct = setProductToTrolley(productToAdd , trolley);
             trolleyItems.add(trolleyProduct);
             trolley.setProducts(trolleyItems);
-            trolley.setTotalItems(totalTrolleyItems);
         }
         else {
             log.warn("Prodotto non valido per aggiunta carrello");
             throw new ApiException("Aggiunta carrello fallita , prodotto non disponibile" , HttpStatus.BAD_REQUEST);
         }
-        return trolleyMapper.toTrolleyDto(trolley);
+        TrolleyDto trolleyDto = trolleyMapper.toTrolleyDto(trolley);
+        log.debug("user id : {}" , trolleyDto.getUserId());
+        return trolleyDto;
     }
 
 
@@ -112,6 +114,7 @@ public class TrolleyServiceImpl implements TrolleyService {
 
 
     // Da migliorare la struttura del codice e l'architettura
+
 
 
 
