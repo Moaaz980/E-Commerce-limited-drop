@@ -56,8 +56,8 @@ public class SecurityConfig {
                         .requestMatchers( "/oauth2/authorization/**"
                                 ).permitAll()
                         .requestMatchers( "/login/oauth2/code/**").permitAll()
-                        .requestMatchers(HttpMethod.GET , "/products").hasRole("USER")
-                        .requestMatchers(HttpMethod.GET , "/products/{id}").hasRole("USER")
+                        .requestMatchers(HttpMethod.GET , "/products").permitAll()
+                        .requestMatchers(HttpMethod.GET , "/products/{id}").permitAll()
                         .requestMatchers(HttpMethod.POST , "/products").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST , "/drops").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT , "/products/{id}").hasRole("ADMIN")

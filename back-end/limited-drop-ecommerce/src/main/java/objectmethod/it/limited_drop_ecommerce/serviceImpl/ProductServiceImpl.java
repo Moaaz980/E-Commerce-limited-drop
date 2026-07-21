@@ -7,6 +7,7 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import objectmethod.it.limited_drop_ecommerce.dtos.request.ProductCreationRequestDto;
 import objectmethod.it.limited_drop_ecommerce.dtos.request.ProductUpdateDto;
+import objectmethod.it.limited_drop_ecommerce.dtos.response.AvailabilityDto;
 import objectmethod.it.limited_drop_ecommerce.dtos.response.ProductDto;
 import objectmethod.it.limited_drop_ecommerce.entities.Drop;
 import objectmethod.it.limited_drop_ecommerce.entities.Product;
@@ -94,8 +95,10 @@ public class ProductServiceImpl implements ProductService {
         log.info("Cancellazione prodotto : {} andata con successo" , productId);
     }
 
+
+    // Controllare se un prodotto è acquistabile
     @Override
-    public boolean isItAvailableForPurchase(String productId) {
+    public AvailabilityDto isItAvailableForPurchase(String productId) {
         log.info("Controllo prodotto : {} , se è disponibile" , productId);
         boolean isValid =  productRepository.isPossibileToPurchase(productId);
         if (!isValid) {
@@ -103,7 +106,9 @@ public class ProductServiceImpl implements ProductService {
             throw new ApiException("Prodotto non disponibile", HttpStatus.BAD_REQUEST);
         }
         log.debug("Prodotto : {}  è acquistabile : {}" , productId ,  true);
-        return isValid;
+        AvailabilityDto valid = new AvailabilityDto();
+        valid.setAvailable(true);
+        return valid;
     }
 
 

@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import objectmethod.it.limited_drop_ecommerce.dtos.request.ProductCreationRequestDto;
 import objectmethod.it.limited_drop_ecommerce.dtos.request.ProductUpdateDto;
+import objectmethod.it.limited_drop_ecommerce.dtos.response.AvailabilityDto;
 import objectmethod.it.limited_drop_ecommerce.dtos.response.ProductDto;
 import objectmethod.it.limited_drop_ecommerce.services.ProductService;
 import org.springframework.http.HttpStatus;
@@ -48,9 +49,9 @@ public class ProductController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/{id}/disponibile")
-    public ResponseEntity<Boolean> IsPossibileToPurchase(@PathVariable("id") String productId) {
-        boolean res = productService.isItAvailableForPurchase(productId);
+    @GetMapping("/{id}/availability")
+    public ResponseEntity<AvailabilityDto> isPossibileToPurchase(@PathVariable("id") String productId) {
+        AvailabilityDto res = productService.isItAvailableForPurchase(productId);
         return ResponseEntity.ok(res);
     }
 }
